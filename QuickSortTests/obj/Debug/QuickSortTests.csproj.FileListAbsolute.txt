@@ -1,0 +1,8 @@
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\QuickSortTests.dll
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\QuickSortTests.pdb
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\QuickSort.exe
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\QuickSort.pdb
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.csprojResolveAssemblyReference.cache
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.dll
+D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.pdb
