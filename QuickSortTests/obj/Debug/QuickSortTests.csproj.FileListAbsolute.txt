@@ -6,3 +6,12 @@ D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\bin\Debug\QuickSort
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.csprojResolveAssemblyReference.cache
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.dll
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.pdb
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\QuickSortTests.dll
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\QuickSortTests.pdb
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\QuickSort.exe
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\QuickSort.pdb
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.csprojResolveAssemblyReference.cache
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.dll
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSortTests\obj\Debug\QuickSortTests.pdb

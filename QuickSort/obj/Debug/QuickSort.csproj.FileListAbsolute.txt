@@ -4,3 +4,9 @@ D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSort\bin\Debug\QuickSort.pdb
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSort\obj\Debug\QuickSort.csprojResolveAssemblyReference.cache
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSort\obj\Debug\QuickSort.exe
 D:\Video\Stanford Algorithms\AlgoW2\QuickSort\QuickSort\obj\Debug\QuickSort.pdb
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\bin\Debug\QuickSort.exe.config
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\obj\Debug\QuickSort.exe
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\obj\Debug\QuickSort.pdb
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\obj\Debug\QuickSort.csprojResolveAssemblyReference.cache
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\bin\Debug\QuickSort.exe
+C:\Users\Nilufar\Source\Repos\QuickSort\QuickSort\bin\Debug\QuickSort.pdb

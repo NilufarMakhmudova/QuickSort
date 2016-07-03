@@ -11,12 +11,15 @@ namespace QuickSort
     {
         static void Main(string[] args)
         {
-            int[] _10integers = QuickSortHelper.ReadFiles(@"D:\Video\Stanford Algorithms\AlgoW2\QuickSort\10.txt");
+            int[] _10integers = QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\10.txt");
             QuickSort sort = new QuickSort();
             //fix running totals
-            SortResult result = sort.QuickSortAlgorithmWithFirstElementAsPivot(new SortResult() { Array = _10integers, numberOfComparisons = 0 });
-            Console.WriteLine(result.numberOfComparisons);
-            Console.WriteLine(result.Array.ToString());
+            int numberOfComparisons = 0;
+            sort.QuickSortAlgorithmWithFirstElementAsPivot(_10integers, ref numberOfComparisons);
+            foreach (int a in _10integers)
+            {
+                Console.WriteLine(a);
+            }
             Console.ReadKey();
         }
 
@@ -24,31 +27,111 @@ namespace QuickSort
     }
 
     public  class QuickSort {
-        public SortResult QuickSortAlgorithmWithFirstElementAsPivot(SortResult integerArray) {
-            if (integerArray.Array.Length == 0) return new SortResult() { Array = new int[0], numberOfComparisons = integerArray.numberOfComparisons };
-            else if (integerArray.Array.Length == 1) return new SortResult() { Array = integerArray.Array, numberOfComparisons = integerArray.numberOfComparisons };
+        public void QuickSortAlgorithmWithFirstElementAsPivot(ref int[] integerArray, ref int numbOfComparisons) {
+            if (integerArray.Length == 0) return;
+            else if (integerArray.Length == 1) return;
             else {
-                int pivot = integerArray.Array[0];
-                PartitionResult partitionResult = DoPartition(integerArray, pivot);
-                QuickSortAlgorithmWithFirstElementAsPivot(partitionResult.FirstPart);
-                QuickSortAlgorithmWithFirstElementAsPivot(partitionResult.SecondPart);
-                return integerArray;
+                int pivot = integerArray[0];
+                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
+                
+                QuickSortAlgorithmWithFirstElementAsPivot(ref integerArray.Take(partitionResult-1).ToArray(), ref numbOfComparisons);
+                QuickSortAlgorithmWithFirstElementAsPivot(ref integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
+                }
+        }
+
+        public void QuickSortAlgorithmWithLastElementAsPivot(int[] integerArray, ref int numbOfComparisons)
+        {
+            if (integerArray.Length == 0) return;
+            else if (integerArray.Length == 1) return;
+            else
+            {
+                //swap last element with first
+                int first = integerArray[0];
+                integerArray[0] = integerArray[integerArray.Length - 1];
+                integerArray[integerArray.Length - 1]=first;
+
+                int pivot = integerArray[0];
+                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
+
+                QuickSortAlgorithmWithLastElementAsPivot(integerArray.Take(partitionResult - 1).ToArray(), ref numbOfComparisons);
+                QuickSortAlgorithmWithLastElementAsPivot(integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
             }
         }
 
-        private PartitionResult DoPartition(SortResult integerArray, int pivot)
+        public void QuickSortAlgorithmWithMedianElementAsPivot(int[] integerArray, ref int numbOfComparisons)
         {
-            int numbOfComparisons = integerArray.Array.Length-1 + integerArray.numberOfComparisons;
+            if (integerArray.Length == 0) return;
+            else if (integerArray.Length == 1) return;
+            else
+            {
+                int pivot;
+                int arraylenght = integerArray.Length;
+                decimal halfLength = arraylenght / 2;
+                int first = integerArray[0];
+                int last = integerArray[arraylenght - 1];
+                int middle = integerArray[(int)(Math.Ceiling(halfLength))];
+
+                if (first > middle) {
+                    if (first > last) {
+                        if (middle > last)
+                        {
+                            pivot = middle;
+                            integerArray[0] = middle;
+                            integerArray[(int)(Math.Ceiling(halfLength))] = first;
+                        }
+                        else {
+                            pivot = last;
+                            integerArray[0] = last;
+                            integerArray[arraylenght - 1] = first;
+                        }
+                    }
+                    else pivot = first;
+                        
+                }
+                else {
+                    if (middle > last)
+                    {
+                        if (first > last)
+                        {
+                            pivot = first;
+                        }
+                        else
+                        {
+                            pivot = last;
+                            integerArray[0] = last;
+                            integerArray[arraylenght - 1] = first;
+                        }
+                    }
+                    else
+                    {
+                        pivot = middle;
+                        integerArray[0] = middle;
+                        integerArray[(int)(Math.Ceiling(halfLength))] = first;
+                    }
+
+                }
+                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
+
+                QuickSortAlgorithmWithMedianElementAsPivot(integerArray.Take(partitionResult - 1).ToArray(), ref numbOfComparisons);
+                QuickSortAlgorithmWithMedianElementAsPivot(integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
+            }
+        }
+
+
+
+        private int DoPartition(ref int[] integerArray, int pivot, ref int numberOfComparisons)
+        {
+            numberOfComparisons += integerArray.Length - 1;
             //last index of integers that are less than pivot
             int j = 1;
 
-            for (int i =1; i<integerArray.Array.Length;) {
-                if (integerArray.Array[i] < pivot)
+            for (int i =1; i<integerArray.Length;) {
+                if (integerArray[i] < pivot)
                 {
                     //swap with unsortedArray[i] j+1
-                    int takeMeInt = integerArray.Array[j];
-                    integerArray.Array[j] = integerArray.Array[i];
-                    integerArray.Array[i] = takeMeInt;
+                    int takeMeInt = integerArray[j];
+                    integerArray[j] = integerArray[i];
+                    integerArray[i] = takeMeInt;
                     j++;
                     i++;
                 }
@@ -57,12 +140,11 @@ namespace QuickSort
                 }
             }
             //swap pivot with last in less part
-            int toComeFirst = integerArray.Array[j-1];
-            integerArray.Array[0] = toComeFirst;
-            integerArray.Array[j-1] = pivot;
+            int toComeFirst = integerArray[j-1];
+            integerArray[0] = toComeFirst;
+            integerArray[j-1] = pivot;
 
-            PartitionResult result = new PartitionResult() { FirstPart = new SortResult() { Array = integerArray.Array.Take(j-1).ToArray(), numberOfComparisons = numbOfComparisons }, SecondPart = new SortResult() { Array = integerArray.Array.Skip(j ).ToArray(), numberOfComparisons = numbOfComparisons } };
-            return result;
+            return j;
         }
     }
 
@@ -79,17 +161,4 @@ namespace QuickSort
             return result;
         }
     }
-
-    public class PartitionResult {
-        public SortResult FirstPart { get; set; }
-        public SortResult SecondPart { get; set; }
-   
-    }
-
-    public class SortResult {
-        public int[] Array { get; set; }
-        public int numberOfComparisons { get; set; }
-    }
-
-
 }
