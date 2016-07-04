@@ -18,7 +18,7 @@ namespace QuickSortTests
             QuickSort.QuickSort sort = new QuickSort.QuickSort();
             int[] arrayToBeSorted = QuickSort.QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\1000.txt");
             int numberOfComparisons = 0;
-            sort.QuickSortAlgorithmWithFirstElementAsPivot(arrayToBeSorted, ref numberOfComparisons);
+            sort.QuickSortAlgorithmWithFirstElementAsPivot(arrayToBeSorted, ref numberOfComparisons, 0, 999);
             Assert.AreEqual(expected, numberOfComparisons);
         }
 
@@ -29,7 +29,7 @@ namespace QuickSortTests
             QuickSort.QuickSort sort = new QuickSort.QuickSort();
             int[] arrayToBeSorted = QuickSort.QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\1000.txt");
             int numberOfComparisons = 0;
-            sort.QuickSortAlgorithmWithLastElementAsPivot(arrayToBeSorted, ref numberOfComparisons);
+            sort.QuickSortAlgorithmWithLastElementAsPivot(arrayToBeSorted, ref numberOfComparisons, 0, 999);
             Assert.AreEqual(expected, numberOfComparisons);
         }
 
@@ -40,7 +40,7 @@ namespace QuickSortTests
             QuickSort.QuickSort sort = new QuickSort.QuickSort();
             int[] arrayToBeSorted = QuickSort.QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\1000.txt");
             int numberOfComparisons = 0;
-            sort.QuickSortAlgorithmWithMedianElementAsPivot(arrayToBeSorted, ref numberOfComparisons);
+            sort.QuickSortAlgorithmWithMedianElementAsPivot(arrayToBeSorted, ref numberOfComparisons, 0, 999);
             Assert.AreEqual(expected, numberOfComparisons);
         }
 

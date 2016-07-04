@@ -15,7 +15,7 @@ namespace QuickSort
             QuickSort sort = new QuickSort();
             //fix running totals
             int numberOfComparisons = 0;
-            sort.QuickSortAlgorithmWithFirstElementAsPivot(_10integers, ref numberOfComparisons);
+            sort.QuickSortAlgorithmWithMedianElementAsPivot(_10integers, ref numberOfComparisons, 0, 9);
             foreach (int a in _10integers)
             {
                 Console.WriteLine(a);
@@ -26,69 +26,130 @@ namespace QuickSort
 
     }
 
-    public  class QuickSort {
-        public void QuickSortAlgorithmWithFirstElementAsPivot(ref int[] integerArray, ref int numbOfComparisons) {
-            if (integerArray.Length == 0) return;
-            else if (integerArray.Length == 1) return;
-            else {
-                int pivot = integerArray[0];
-                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
-                
-                QuickSortAlgorithmWithFirstElementAsPivot(ref integerArray.Take(partitionResult-1).ToArray(), ref numbOfComparisons);
-                QuickSortAlgorithmWithFirstElementAsPivot(ref integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
-                }
-        }
-
-        public void QuickSortAlgorithmWithLastElementAsPivot(int[] integerArray, ref int numbOfComparisons)
+    public class QuickSort
+    {
+        public void QuickSortAlgorithmWithFirstElementAsPivot(int[] integerArray, ref int numbOfComparisons, int begin, int end)
         {
-            if (integerArray.Length == 0) return;
-            else if (integerArray.Length == 1) return;
+            if (begin >= end) return;
             else
             {
-                //swap last element with first
-                int first = integerArray[0];
-                integerArray[0] = integerArray[integerArray.Length - 1];
-                integerArray[integerArray.Length - 1]=first;
+                int pivot = integerArray[begin];
+                //partition
 
-                int pivot = integerArray[0];
-                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
+                numbOfComparisons += end - begin;
+                //last index of integers that are less than pivot
+                int j = begin + 1;
 
-                QuickSortAlgorithmWithLastElementAsPivot(integerArray.Take(partitionResult - 1).ToArray(), ref numbOfComparisons);
-                QuickSortAlgorithmWithLastElementAsPivot(integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
+                for (int i = begin; i <= end;)
+                {
+                    if (integerArray[i] < pivot)
+                    {
+                        //swap with unsortedArray[i] j+1
+                        int takeMeInt = integerArray[j];
+                        integerArray[j] = integerArray[i];
+                        integerArray[i] = takeMeInt;
+                        j++;
+                        i++;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+                //swap pivot with last in less part
+                int toComeFirst = integerArray[j - 1];
+                integerArray[begin] = toComeFirst;
+                integerArray[j - 1] = pivot;
+
+                QuickSortAlgorithmWithFirstElementAsPivot(integerArray, ref numbOfComparisons, begin, j - 2);
+                QuickSortAlgorithmWithFirstElementAsPivot(integerArray, ref numbOfComparisons, j, end);
             }
         }
 
-        public void QuickSortAlgorithmWithMedianElementAsPivot(int[] integerArray, ref int numbOfComparisons)
+        public void QuickSortAlgorithmWithLastElementAsPivot(int[] integerArray, ref int numbOfComparisons, int begin, int end)
         {
-            if (integerArray.Length == 0) return;
-            else if (integerArray.Length == 1) return;
+            if (begin >= end) return;
+            else
+            {
+                //swap last element with first
+                int first = integerArray[begin];
+                integerArray[begin] = integerArray[end];
+                integerArray[end] = first;
+
+                int pivot = integerArray[begin];
+                //partition
+
+                numbOfComparisons += end - begin;
+                //last index of integers that are less than pivot
+                int j = begin + 1;
+
+                for (int i = begin; i <= end;)
+                {
+                    if (integerArray[i] < pivot)
+                    {
+                        //swap with unsortedArray[i] j+1
+                        int takeMeInt = integerArray[j];
+                        integerArray[j] = integerArray[i];
+                        integerArray[i] = takeMeInt;
+                        j++;
+                        i++;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+                //swap pivot with last in less part
+                int toComeFirst = integerArray[j - 1];
+                integerArray[begin] = toComeFirst;
+                integerArray[j - 1] = pivot;
+
+                QuickSortAlgorithmWithLastElementAsPivot(integerArray, ref numbOfComparisons, begin, j - 2);
+                QuickSortAlgorithmWithLastElementAsPivot(integerArray, ref numbOfComparisons, j, end);
+
+            }
+        }
+
+        public void QuickSortAlgorithmWithMedianElementAsPivot(int[] integerArray, ref int numbOfComparisons, int begin, int end)
+        {
+            if (begin >= end) return;
+            else if (end - begin == 1) {
+                QuickSortAlgorithmWithFirstElementAsPivot(integerArray, ref numbOfComparisons, begin, end);
+            }
             else
             {
                 int pivot;
-                int arraylenght = integerArray.Length;
-                decimal halfLength = arraylenght / 2;
-                int first = integerArray[0];
-                int last = integerArray[arraylenght - 1];
-                int middle = integerArray[(int)(Math.Ceiling(halfLength))];
+                int arraylenght = end - begin + 1;
 
-                if (first > middle) {
-                    if (first > last) {
+                double arrayLenghtInDouble = (double)arraylenght;
+                
+                int halfLength =(int)Math.Ceiling( arrayLenghtInDouble/ 2);
+                int first = integerArray[begin];
+                int last = integerArray[end];
+                int middle =integerArray[begin + halfLength-1];
+
+                if (first > middle)
+                {
+                    if (first > last)
+                    {
                         if (middle > last)
                         {
                             pivot = middle;
-                            integerArray[0] = middle;
-                            integerArray[(int)(Math.Ceiling(halfLength))] = first;
+                            integerArray[begin] = middle;
+                            integerArray[halfLength] = first;
                         }
-                        else {
+                        else
+                        {
                             pivot = last;
-                            integerArray[0] = last;
-                            integerArray[arraylenght - 1] = first;
+                            integerArray[begin] = last;
+                            integerArray[end] = first;
                         }
                     }
                     else pivot = first;
-                        
+
                 }
-                else {
+                else
+                {
                     if (middle > last)
                     {
                         if (first > last)
@@ -98,56 +159,54 @@ namespace QuickSort
                         else
                         {
                             pivot = last;
-                            integerArray[0] = last;
-                            integerArray[arraylenght - 1] = first;
+                            integerArray[begin] = last;
+                            integerArray[end] = first;
                         }
                     }
                     else
                     {
                         pivot = middle;
-                        integerArray[0] = middle;
-                        integerArray[(int)(Math.Ceiling(halfLength))] = first;
+                        integerArray[begin] = middle;
+                        integerArray[halfLength] = first;
                     }
 
                 }
-                int partitionResult = DoPartition(ref integerArray, pivot, ref numbOfComparisons);
 
-                QuickSortAlgorithmWithMedianElementAsPivot(integerArray.Take(partitionResult - 1).ToArray(), ref numbOfComparisons);
-                QuickSortAlgorithmWithMedianElementAsPivot(integerArray.Skip(partitionResult).ToArray(), ref numbOfComparisons);
-            }
-        }
+                numbOfComparisons += end - begin;
+                //last index of integers that are less than pivot
+                int j = begin + 1;
 
-
-
-        private int DoPartition(ref int[] integerArray, int pivot, ref int numberOfComparisons)
-        {
-            numberOfComparisons += integerArray.Length - 1;
-            //last index of integers that are less than pivot
-            int j = 1;
-
-            for (int i =1; i<integerArray.Length;) {
-                if (integerArray[i] < pivot)
+                for (int i = begin; i <= end;)
                 {
-                    //swap with unsortedArray[i] j+1
-                    int takeMeInt = integerArray[j];
-                    integerArray[j] = integerArray[i];
-                    integerArray[i] = takeMeInt;
-                    j++;
-                    i++;
+                    if (integerArray[i] < pivot)
+                    {
+                        //swap with unsortedArray[i] j+1
+                        int takeMeInt = integerArray[j];
+                        integerArray[j] = integerArray[i];
+                        integerArray[i] = takeMeInt;
+                        j++;
+                        i++;
+                    }
+                    else
+                    {
+                        i++;
+                    }
                 }
-                else {
-                    i++;
-                }
-            }
-            //swap pivot with last in less part
-            int toComeFirst = integerArray[j-1];
-            integerArray[0] = toComeFirst;
-            integerArray[j-1] = pivot;
+                //swap pivot with last in less part
+                int toComeFirst = integerArray[j - 1];
+                integerArray[begin] = toComeFirst;
+                integerArray[j - 1] = pivot;
 
-            return j;
+                QuickSortAlgorithmWithMedianElementAsPivot(integerArray, ref numbOfComparisons, begin, j - 2);
+                QuickSortAlgorithmWithMedianElementAsPivot(integerArray, ref numbOfComparisons, j, end);
+
+
+            }
         }
+
     }
 
+        
     public static class QuickSortHelper {
 
        public static int[] ReadFiles(string path)
