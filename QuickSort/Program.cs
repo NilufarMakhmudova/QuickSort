@@ -11,15 +11,20 @@ namespace QuickSort
     {
         static void Main(string[] args)
         {
-            int[] _10integers = QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\10.txt");
+            int[] _10integers = QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\10000.txt");
+            int[] _100integers = QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\10000.txt");
+            int[] _1000integers = QuickSortHelper.ReadFiles(@"C:\Users\Nilufar\Source\Repos\QuickSort\10000.txt");
             QuickSort sort = new QuickSort();
             //fix running totals
-            int numberOfComparisons = 0;
-            sort.QuickSortAlgorithmWithMedianElementAsPivot(_10integers, ref numberOfComparisons, 0, 9);
-            foreach (int a in _10integers)
-            {
-                Console.WriteLine(a);
-            }
+            int numberOfComparisons1 = 0;
+            int numberOfComparisons2 = 0;
+            int numberOfComparisons3 = 0;
+            sort.QuickSortAlgorithmWithMedianElementAsPivot(_10integers, ref numberOfComparisons3, 0, 9999);
+            sort.QuickSortAlgorithmWithFirstElementAsPivot(_1000integers, ref numberOfComparisons1, 0, 9999);
+            sort.QuickSortAlgorithmWithLastElementAsPivot(_100integers, ref numberOfComparisons2, 0, 9999);
+            Console.WriteLine(numberOfComparisons1);
+            Console.WriteLine(numberOfComparisons2);
+            Console.WriteLine(numberOfComparisons3);
             Console.ReadKey();
         }
 
@@ -113,61 +118,56 @@ namespace QuickSort
         public void QuickSortAlgorithmWithMedianElementAsPivot(int[] integerArray, ref int numbOfComparisons, int begin, int end)
         {
             if (begin >= end) return;
-            else if (end - begin == 1) {
-                QuickSortAlgorithmWithFirstElementAsPivot(integerArray, ref numbOfComparisons, begin, end);
-            }
             else
             {
                 int pivot;
                 int arraylenght = end - begin + 1;
 
-                double arrayLenghtInDouble = (double)arraylenght;
-                
-                int halfLength =(int)Math.Ceiling( arrayLenghtInDouble/ 2);
-                int first = integerArray[begin];
-                int last = integerArray[end];
-                int middle =integerArray[begin + halfLength-1];
+                int middleIndex = (end+begin)/2;
+                int firstNumber = integerArray[begin];
+                int lastNumber = integerArray[end];
+                int middleNumber =integerArray[middleIndex];
 
-                if (first > middle)
+                if (firstNumber > middleNumber)
                 {
-                    if (first > last)
+                    if (firstNumber > lastNumber)
                     {
-                        if (middle > last)
+                        if (middleNumber > lastNumber)
                         {
-                            pivot = middle;
-                            integerArray[begin] = middle;
-                            integerArray[halfLength] = first;
+                            pivot = middleNumber;
+                            integerArray[begin] = middleNumber;
+                            integerArray[middleIndex] = firstNumber;
                         }
                         else
                         {
-                            pivot = last;
-                            integerArray[begin] = last;
-                            integerArray[end] = first;
+                            pivot = lastNumber;
+                            integerArray[begin] = lastNumber;
+                            integerArray[end] = firstNumber;
                         }
                     }
-                    else pivot = first;
+                    else pivot = firstNumber;
 
                 }
                 else
                 {
-                    if (middle > last)
+                    if (middleNumber > lastNumber)
                     {
-                        if (first > last)
+                        if (firstNumber > lastNumber)
                         {
-                            pivot = first;
+                            pivot = firstNumber;
                         }
                         else
                         {
-                            pivot = last;
-                            integerArray[begin] = last;
-                            integerArray[end] = first;
+                            pivot = lastNumber;
+                            integerArray[begin] = lastNumber;
+                            integerArray[end] = firstNumber;
                         }
                     }
                     else
                     {
-                        pivot = middle;
-                        integerArray[begin] = middle;
-                        integerArray[halfLength] = first;
+                        pivot = middleNumber;
+                        integerArray[begin] = middleNumber;
+                        integerArray[middleIndex] = firstNumber;
                     }
 
                 }
